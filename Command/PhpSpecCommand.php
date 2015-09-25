@@ -46,11 +46,10 @@ class PhpSpecCommand extends ContainerAwareCommand
         $parser = new \PhpParser\Parser(new \PhpParser\Lexer\Emulative);
 
         // Init the factory
-        $factory       = new PhpParser\BuilderFactory();
-        $prettyPrinter = new PhpParser\PrettyPrinter\Standard();
+        $factory       = new \PhpParser\BuilderFactory();
+        $prettyPrinter = new \PhpParser\PrettyPrinter\Standard();
 
         // Init the progress bar
-        $output   = new StreamOutput(fopen('php://stdout', 'w'));
         $progress = new ProgressBar($output, count($entities));
 
         // Parse each class
@@ -86,35 +85,35 @@ class PhpSpecCommand extends ContainerAwareCommand
                     ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                         $factoryThis,
                         'shouldHaveType',
-                        array(new \PhpParser\Node\Arg(new PhpParser\Node\Scalar\String_($namespace)))
+                        array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_($namespace)))
                     )))
                 ->addStmt($factory
                     ->method('it_has_no_id_by_default')
                     ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                         new \PhpParser\Node\Expr\MethodCall($factoryThis, 'getId'),
                         'shouldReturn',
-                        array(new \PhpParser\Node\Arg(new PhpParser\Node\Expr\ConstFetch(new PhpParser\Node\Name('null'))))
+                        array(new \PhpParser\Node\Arg(new \PhpParser\Node\Expr\ConstFetch(new \PhpParser\Node\Name('null'))))
                     )));
 
             foreach ($entity->fieldMappings as $name => $field) {
                 if ($name !== 'id' && $name !== 'uuid') {
                     switch ($field['type']) {
                         case 'integer':
-                            $value = new PhpParser\Node\Scalar\LNumber(3);
+                            $value = new \PhpParser\Node\Scalar\LNumber(3);
                             break;
 
                         case 'string':
                         case 'text':
                         case 'guid':
-                            $value = new PhpParser\Node\Scalar\String_('A string');
+                            $value = new \PhpParser\Node\Scalar\String_('A string');
                             break;
 
                         case 'boolean':
-                            $value = new PhpParser\Node\Expr\ConstFetch(new PhpParser\Node\Name('true'));
+                            $value = new \PhpParser\Node\Expr\ConstFetch(new \PhpParser\Node\Name('true'));
                             break;
 
                         case 'datetime':
-                            $value = new PhpParser\Node\Expr\New_(new PhpParser\Node\Name('\DateTime'));
+                            $value = new \PhpParser\Node\Expr\New_(new \PhpParser\Node\Name('\DateTime'));
                             break;
 
                         default:
@@ -146,7 +145,7 @@ class PhpSpecCommand extends ContainerAwareCommand
                     $factoryClass = $factoryClass
                         ->addStmt($factory
                             ->method('its_' . $name . '_are_mutable')
-                            ->addStmt(new \PhpParser\Node\Expr\Assign(new \PhpParser\Node\Expr\Variable('collection'), new PhpParser\Node\Expr\New_(new PhpParser\Node\Name('\\' . ARRAY_COLLECTION))))
+                            ->addStmt(new \PhpParser\Node\Expr\Assign(new \PhpParser\Node\Expr\Variable('collection'), new \PhpParser\Node\Expr\New_(new \PhpParser\Node\Name('\\' . ARRAY_COLLECTION))))
                             ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                                 $factoryThis,
                                 'set' . ucfirst($name),
@@ -164,7 +163,7 @@ class PhpSpecCommand extends ContainerAwareCommand
                             ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                                 new \PhpParser\Node\Expr\MethodCall($factoryThis, 'get' . ucfirst($name)),
                                 'shouldHaveType',
-                                array(new \PhpParser\Node\Arg(new PhpParser\Node\Scalar\String_(ARRAY_COLLECTION)))
+                                array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_(ARRAY_COLLECTION)))
                             )));
                 }
             }
