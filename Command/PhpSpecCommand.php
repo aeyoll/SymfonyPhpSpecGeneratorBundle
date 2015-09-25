@@ -1,6 +1,6 @@
 <?php
 
-namespace Aeyoll\SymfonyPhpSpecGeneratorBundle;
+namespace Aeyoll\SymfonyPhpSpecGeneratorBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
