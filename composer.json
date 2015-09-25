@@ -5,8 +5,8 @@
         "nikic/php-parser": "^1.4"
     },
     "autoload" : {
-        "psr-0" : {
-            "Aeyoll\\SymfonyPhpSpecGeneratorBundle" : ""
+        "psr-4" : {
+            "Aeyoll\\SymfonyPhpSpecGeneratorBundle" : [ "src/" ]
         }
     },
     "license": "MIT",
