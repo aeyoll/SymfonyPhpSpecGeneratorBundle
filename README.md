@@ -4,11 +4,11 @@ This bundle is a basic generator for PhpSpec, based on the Doctrine defined in y
 
 ## Installation
 
-Begin by installing the package through Composer. Edit your project's `composer.json` file to require `aeyoll/aeyoll/symfony-php-spec-generator-bundle`.
+Begin by installing the package through Composer. Edit your project's `composer.json` file to require `aeyoll/symfony-php-spec-generator-bundle`.
 
   ```json
   "require": {
-    "aeyoll/aeyoll/symfony-php-spec-generator-bundle": "dev-master"
+    "aeyoll/symfony-php-spec-generator-bundle": "dev-master"
   }
   ```
 Next, use Composer to update your project from the the Terminal:
