@@ -12,7 +12,6 @@ use PhpParser\Error;
 use PhpParser\Parser;
 use PhpParser\Lexer\Emulative;
 
-const PROJECT_NAME          = 'MyFairJob';
 const SRC_PATH              = 'src/';
 const SPEC_PATH             = 'spec/';
 const SPEC_NAMESPACE_PREFIX = 'spec\\';
