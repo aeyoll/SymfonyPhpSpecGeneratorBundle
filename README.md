@@ -1,5 +1,9 @@
 # SymfonyPhpSpecGeneratorBundle
 
+[![Build Status](https://travis-ci.org/aeyoll/SymfonyPhpSpecGeneratorBundle.svg?branch=master)](https://travis-ci.org/aeyoll/SymfonyPhpSpecGeneratorBundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aeyoll/SymfonyPhpSpecGeneratorBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aeyoll/SymfonyPhpSpecGeneratorBundle/?branch=master)
+[![Test Coverage](https://codeclimate.com/github/aeyoll/SymfonyPhpSpecGeneratorBundle/badges/coverage.svg)](https://codeclimate.com/github/aeyoll/SymfonyPhpSpecGeneratorBundle/coverage)
+
 This bundle is a basic generator for PhpSpec, based on the Doctrine defined in your Symfony project
 
 ## Installation
