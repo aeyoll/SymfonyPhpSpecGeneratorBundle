@@ -93,7 +93,7 @@ class GeneratorService implements GeneratorServiceInterface
 
         $this->specPath      = 'spec/' . $path;
         $this->specClass     = $this->entityClass . 'Spec';
-        $this->specNamespace = 'spec\\' . $namespace;
+        $this->specNamespace = str_replace('/', '\\', $this->specPath);
     }
 
     /**

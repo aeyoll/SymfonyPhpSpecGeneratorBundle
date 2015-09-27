@@ -36,4 +36,39 @@ class GeneratorServiceSpec extends ObjectBehavior
     {
         $this->getPrettyPrinter()->shouldBeAnInstanceOf('\PhpParser\PrettyPrinter\Standard');
     }
+
+    function its_namespace_is_mutable()
+    {
+        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
+        $this->setNamespace($namespace);
+        $this->getNamespace()->shouldReturn($namespace);
+    }
+
+    function it_should_return_the_correct_entity_class()
+    {
+        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
+        $this->setNamespace($namespace);
+        $this->getEntityClass()->shouldReturn('GeneratorService');
+    }
+
+    function it_should_return_the_correct_spec_path()
+    {
+        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
+        $this->setNamespace($namespace);
+        $this->getSpecPath()->shouldReturn('spec/Aeyoll/SymfonyPhpSpecGeneratorBundle/Service');
+    }
+
+    function it_should_return_the_correct_spec_class()
+    {
+        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
+        $this->setNamespace($namespace);
+        $this->getSpecClass()->shouldReturn('GeneratorServiceSpec');
+    }
+
+    function it_should_return_the_correct_spec_namespace()
+    {
+        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
+        $this->setNamespace($namespace);
+        $this->getSpecNamespace()->shouldReturn('spec\Aeyoll\SymfonyPhpSpecGeneratorBundle\Service');
+    }
 }
