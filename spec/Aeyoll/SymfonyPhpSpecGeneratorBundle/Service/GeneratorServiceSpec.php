@@ -5,11 +5,17 @@ namespace spec\Aeyoll\SymfonyPhpSpecGeneratorBundle\Service;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
 class GeneratorServiceSpec extends ObjectBehavior
 {
-    function let(\Symfony\Component\DependencyInjection\Container $container)
+    function let(ContainerInterface $container, EntityManagerInterface $entityManager)
     {
-        $this->beConstructedWith($container);
+        $this->beConstructedWith(
+            $container,
+            $entityManager
+        );
     }
 
     function it_is_initializable()
@@ -20,5 +26,10 @@ class GeneratorServiceSpec extends ObjectBehavior
     function it_should_implement_generator_service_interface()
     {
         $this->shouldImplement('Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorServiceInterface');
+    }
+
+    function it_should_get_a_parser()
+    {
+        $this->getParser()->shouldBeAnInstanceOf('\PhpParser\Parser');
     }
 }

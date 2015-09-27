@@ -30,18 +30,15 @@ class PhpSpecCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $entities = array();
-        $em       = $this->getContainer()->get('doctrine')->getManager();
-        $meta     = $em->getMetadataFactory()->getAllMetadata();
-
-        foreach ($meta as $m) {
-            if (preg_match('(' . $input->getArgument('namespace') . ')', $m->getName())) {
-                $entities[] = $m;
-            }
-        }
+        $generatorService = $this
+            ->getContainer()
+            ->get('aeyoll_symfony_php_spec_generator.service.generator');
 
         // Init the parser
-        $parser = new \PhpParser\Parser(new \PhpParser\Lexer\Emulative);
+        $parser = $generatorService->getParser();
+
+        // Init the entities
+        $entities = $generatorService->getEntities($input->getArgument('namespace'));
 
         // Init the factory
         $factory       = new \PhpParser\BuilderFactory();

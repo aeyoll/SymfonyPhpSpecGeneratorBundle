@@ -4,4 +4,4 @@ parameters:
 services:
    aeyoll_symfony_php_spec_generator.service.generator:
        class: %aeyoll_symfony_php_spec_generator.service.generator.class%
-       arguments: [@service_container]
+       arguments: [@service_container, @doctrine.orm.entity_manager]
