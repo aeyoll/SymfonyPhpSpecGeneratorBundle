@@ -27,11 +27,6 @@ class GeneratorServiceSpec extends ObjectBehavior
         $this->shouldImplement('Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorServiceInterface');
     }
 
-    function it_should_get_a_parser()
-    {
-        $this->getParser()->shouldBeAnInstanceOf('\PhpParser\Parser');
-    }
-
     function it_should_get_a_builder_factory()
     {
         $this->getBuilderFactory()->shouldBeAnInstanceOf('\PhpParser\BuilderFactory');

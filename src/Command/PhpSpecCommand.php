@@ -32,9 +32,6 @@ class PhpSpecCommand extends ContainerAwareCommand
             ->getContainer()
             ->get('aeyoll_symfony_php_spec_generator.service.generator');
 
-        // Init the parser
-        $parser = $generatorService->getParser();
-
         // Init the entities
         $entities = $generatorService->getEntities($input->getArgument('namespace'));
 

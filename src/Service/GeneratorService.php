@@ -20,14 +20,6 @@ class GeneratorService implements GeneratorServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function getParser()
-    {
-        return new \PhpParser\Parser(new \PhpParser\Lexer\Emulative);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getBuilderFactory()
     {
         return new \PhpParser\BuilderFactory();

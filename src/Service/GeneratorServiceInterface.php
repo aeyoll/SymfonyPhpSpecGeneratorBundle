@@ -5,13 +5,6 @@ namespace Aeyoll\SymfonyPhpSpecGeneratorBundle\Service;
 interface GeneratorServiceInterface
 {
     /**
-     * Return a PhpParser
-     *
-     * @return \PhpParser\Parser
-     */
-    public function getParser();
-
-    /**
      * Return a PhpParserBuilderFactory
      *
      * @return \PhpParser\BuilderFactory
