@@ -2,5 +2,5 @@ extensions:
     - PhpSpec\Extension\CodeCoverageExtension
 
 code_coverage:
-    output: build/coverage.xml
+    output: build/logs/clover.xml
     format: clover
