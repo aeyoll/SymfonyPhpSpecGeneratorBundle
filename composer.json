@@ -7,6 +7,9 @@
         "phpspec/phpspec": "^2.3",
         "doctrine/orm": "^2.5"
     },
+    "require-dev": {
+        "henrikbjorn/phpspec-code-coverage" : "1.*@dev"
+    },
     "autoload" : {
         "psr-4" : {
             "Aeyoll\\SymfonyPhpSpecGeneratorBundle\\": "src/"
