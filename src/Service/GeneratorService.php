@@ -28,6 +28,22 @@ class GeneratorService implements GeneratorServiceInterface
     /**
      * {@inheritDoc}
      */
+    public function getBuilderFactory()
+    {
+        return new \PhpParser\BuilderFactory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPrettyPrinter()
+    {
+        return new \PhpParser\PrettyPrinter\Standard();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getAllMetadata()
     {
         return $this->entityManager->getMetadataFactory()->getAllMetadata();

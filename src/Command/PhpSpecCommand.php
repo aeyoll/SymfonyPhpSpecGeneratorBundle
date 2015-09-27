@@ -41,8 +41,8 @@ class PhpSpecCommand extends ContainerAwareCommand
         $entities = $generatorService->getEntities($input->getArgument('namespace'));
 
         // Init the factory
-        $factory       = new \PhpParser\BuilderFactory();
-        $prettyPrinter = new \PhpParser\PrettyPrinter\Standard();
+        $factory       = $generatorService->getBuilderFactory();
+        $prettyPrinter = $generatorService->getPrettyPrinter();
 
         // Init the progress bar
         $progress = new ProgressBar($output, count($entities));
