@@ -58,8 +58,15 @@ class PhpSpecCommand extends ContainerAwareCommand
             }
 
             // Paths
-            $relativePathname = str_replace('\\', '/', $entity->name);
-            $specPath         = SPEC_PATH . $relativePathname;
+            $relativePathname      = str_replace('\\', '/', $entity->name);
+            $relativePathnameArray = explode('/', $relativePathname);
+
+            $class = end($relativePathnameArray);
+
+            array_pop($relativePathnameArray);
+
+            $path     = implode('/', $relativePathnameArray);
+            $specPath = SPEC_PATH . $path;
 
             // Namespaces
             $namespace     = $entity->name;
@@ -181,7 +188,7 @@ class PhpSpecCommand extends ContainerAwareCommand
             }
 
             if ($input->getOption('force')) {
-                $fullSpecPath = $specPath . 'Spec.php';
+                $fullSpecPath = $specPath . '/' . $class . 'Spec.php';
 
                 if (!is_dir($specPath)) {
                     mkdir($specPath, 0755, true);
