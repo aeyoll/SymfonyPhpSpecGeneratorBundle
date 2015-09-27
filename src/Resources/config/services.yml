@@ -1,7 +1,7 @@
 parameters:
-#    aeyoll_symfony_php_spec_generator.example.class: Aeyoll\SymfonyPhpSpecGeneratorBundle\Example
+   aeyoll_symfony_php_spec_generator.service.generator.class: Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService
 
 services:
-#    aeyoll_symfony_php_spec_generator.example:
-#        class: %aeyoll_symfony_php_spec_generator.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+   aeyoll_symfony_php_spec_generator.service.generator:
+       class: %aeyoll_symfony_php_spec_generator.service.generator.class%
+       arguments: [@service_container]

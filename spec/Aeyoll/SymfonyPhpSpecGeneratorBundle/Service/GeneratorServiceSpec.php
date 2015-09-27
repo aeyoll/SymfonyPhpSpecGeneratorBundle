@@ -7,6 +7,11 @@ use Prophecy\Argument;
 
 class GeneratorServiceSpec extends ObjectBehavior
 {
+    function let(\Symfony\Component\DependencyInjection\Container $container)
+    {
+        $this->beConstructedWith($container);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService');
