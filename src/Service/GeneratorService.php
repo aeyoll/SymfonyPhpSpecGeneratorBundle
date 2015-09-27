@@ -11,6 +11,16 @@ class GeneratorService implements GeneratorServiceInterface
 
     protected $entityManager;
 
+    protected $namespace;
+
+    protected $entityClass;
+
+    protected $specClass;
+
+    protected $specPath;
+
+    protected $specNamespace;
+
     public function __construct(ContainerInterface $container, EntityManagerInterface $entityManager)
     {
         $this->container     = $container;
@@ -44,16 +54,16 @@ class GeneratorService implements GeneratorServiceInterface
     /**
      * {@inheritDoc}
      *
-     * @param string $namespace
+     * @param string $bundle
      */
-    public function getEntities($namespace)
+    public function getEntities($bundle)
     {
         $entities = array();
         $meta     = $this->getAllMetadata();
 
         if (count($meta) > 0) {
             foreach ($meta as $m) {
-                if (preg_match('(' . $namespace . ')', $m->getName())) {
+                if (preg_match('(' . $bundle . ')', $m->getName())) {
                     $entities[] = $m;
                 }
             }
@@ -62,5 +72,67 @@ class GeneratorService implements GeneratorServiceInterface
         }
 
         return $entities;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param  string $namespace
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+
+        $relativePathname      = str_replace('\\', '/', $this->namespace);
+        $relativePathnameArray = explode('/', $relativePathname);
+
+        $this->entityClass = end($relativePathnameArray);
+
+        array_pop($relativePathnameArray);
+        $path = implode('/', $relativePathnameArray);
+
+        $this->specPath      = 'spec/' . $path;
+        $this->specClass     = $this->entityClass . 'Spec';
+        $this->specNamespace = 'spec\\' . $namespace;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEntityClass()
+    {
+        return $this->entityClass;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSpecPath()
+    {
+        return $this->specPath;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSpecClass()
+    {
+        return $this->specClass;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSpecNamespace()
+    {
+        return $this->specNamespace;
     }
 }

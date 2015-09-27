@@ -9,11 +9,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-const SRC_PATH              = 'src/';
-const SPEC_PATH             = 'spec/';
-const SPEC_NAMESPACE_PREFIX = 'spec\\';
-const SPEC_CLASS_SUFFIX     = 'Spec';
-const ARRAY_COLLECTION      = 'Doctrine\Common\Collections\ArrayCollection';
+const SRC_PATH         = 'src/';
+const ARRAY_COLLECTION = 'Doctrine\Common\Collections\ArrayCollection';
 
 class PhpSpecCommand extends ContainerAwareCommand
 {
@@ -48,29 +45,11 @@ class PhpSpecCommand extends ContainerAwareCommand
                 echo $entity->name . "\n";
             }
 
-            // Paths
-            $relativePathname      = str_replace('\\', '/', $entity->name);
-            $relativePathnameArray = explode('/', $relativePathname);
-
-            $class = end($relativePathnameArray);
-
-            array_pop($relativePathnameArray);
-
-            $path     = implode('/', $relativePathnameArray);
-            $specPath = SPEC_PATH . $path;
-
-            // Namespaces
-            $namespace     = $entity->name;
-            $specNamespace = SPEC_NAMESPACE_PREFIX . $namespace;
-            $specNamespace = explode('\\', $specNamespace);
-            array_pop($specNamespace);
-            $specNamespace = implode('\\', $specNamespace);
-
-            $explodedNamespace = explode('\\', $namespace);
-
-            // Classes
-            $class     = end($explodedNamespace);
-            $specClass = $class . SPEC_CLASS_SUFFIX;
+            $generatorService->setNamespace($entity->name);
+            $class         = $generatorService->getEntityClass();
+            $specPath      = $generatorService->getSpecPath();
+            $specClass     = $generatorService->getSpecClass();
+            $specNamespace = $generatorService->getSpecNamespace();
 
             // Default factory
             $factoryThis  = new \PhpParser\Node\Expr\Variable('this');
@@ -82,7 +61,7 @@ class PhpSpecCommand extends ContainerAwareCommand
                     ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                         $factoryThis,
                         'shouldHaveType',
-                        array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_($namespace)))
+                        array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_($entity->name)))
                     )))
                 ->addStmt($factory
                     ->method('it_has_no_id_by_default')
@@ -172,7 +151,6 @@ class PhpSpecCommand extends ContainerAwareCommand
                 ->getNode();
 
             $specStmts = array($node);
-
 
             if ($input->getOption('verbose')) {
                 echo $prettyPrinter->prettyPrintFile($specStmts);
