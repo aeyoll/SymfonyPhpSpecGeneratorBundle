@@ -15,6 +15,9 @@ class GeneratorServiceSpec extends ObjectBehavior
             $container,
             $entityManager
         );
+
+        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
+        $this->setNamespace($namespace);
     }
 
     function it_is_initializable()
@@ -46,29 +49,21 @@ class GeneratorServiceSpec extends ObjectBehavior
 
     function it_should_return_the_correct_entity_class()
     {
-        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
-        $this->setNamespace($namespace);
         $this->getEntityClass()->shouldReturn('GeneratorService');
     }
 
     function it_should_return_the_correct_spec_path()
     {
-        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
-        $this->setNamespace($namespace);
         $this->getSpecPath()->shouldReturn('spec/Aeyoll/SymfonyPhpSpecGeneratorBundle/Service');
     }
 
     function it_should_return_the_correct_spec_class()
     {
-        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
-        $this->setNamespace($namespace);
         $this->getSpecClass()->shouldReturn('GeneratorServiceSpec');
     }
 
     function it_should_return_the_correct_spec_namespace()
     {
-        $namespace = 'Aeyoll\SymfonyPhpSpecGeneratorBundle\Service\GeneratorService';
-        $this->setNamespace($namespace);
         $this->getSpecNamespace()->shouldReturn('spec\Aeyoll\SymfonyPhpSpecGeneratorBundle\Service');
     }
 }
