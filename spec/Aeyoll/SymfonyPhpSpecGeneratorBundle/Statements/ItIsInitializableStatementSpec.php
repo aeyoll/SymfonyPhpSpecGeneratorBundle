@@ -12,6 +12,19 @@ class ItIsInitializableStatementSpec extends ObjectBehavior
     function let(\PhpParser\BuilderFactory $factory)
     {
         $this->beConstructedWith($factory, 'entityName');
+        // $this->initStatements()->shouldBeCalled();
+    }
+
+    function it_should_thrown_an_exception_if_constructed_with_incorrect_factory()
+    {
+        $this->beConstructedWith(null, 'entityName');
+        $this->shouldThrow('\Exception');
+    }
+
+    function it_should_thrown_an_exception_if_constructed_with_incorrect_entity_name(\PhpParser\BuilderFactory $factory)
+    {
+        $this->beConstructedWith($factory, null);
+        $this->shouldThrow('\Exception');
     }
 
     function it_has_a_correct_method_name()
