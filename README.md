@@ -23,9 +23,9 @@ Next, use Composer to update your project from the the Terminal:
 
 You can also use the require command from Composer:
 
-    ```
-    composer require aeyoll/symfony-php-spec-generator-bundle
-    ```
+  ```
+  composer require aeyoll/symfony-php-spec-generator-bundle
+  ```
 
 Once the package has been installed, you'll need to add the bundle to your kernel. Open your `app/AppKernel.php` configuration file, and add ```new Aeyoll\SymfonyPhpSpecGeneratorBundle\AeyollSymfonyPhpSpecGeneratorBundle(),``` to the bundle list.
 
