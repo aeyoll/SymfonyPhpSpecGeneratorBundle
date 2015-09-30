@@ -3,9 +3,6 @@
 namespace spec\Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 class ItIsInitializableStatementSpec extends ObjectBehavior
 {
