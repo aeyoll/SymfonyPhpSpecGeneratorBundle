@@ -23,7 +23,7 @@ class ItIsInitializableStatementSpec extends ObjectBehavior
         $this->shouldThrow('\Exception');
     }
 
-    function it_has_a_correct_method_name()
+    function it_has_a_valid_method_name()
     {
         $this->getMethodName()->shouldReturn('it_is_initializable');
     }
