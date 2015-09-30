@@ -2,8 +2,6 @@
 
 namespace Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class ItIsInitializableStatement extends Statement
 {
     /**

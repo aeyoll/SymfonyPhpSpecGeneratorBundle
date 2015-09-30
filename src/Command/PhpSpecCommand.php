@@ -53,8 +53,7 @@ class PhpSpecCommand extends ContainerAwareCommand
             $specNamespace = $generatorService->getSpecNamespace();
 
             // Default factory
-            $factoryThis  = new \PhpParser\Node\Expr\Variable('this');
-
+            $factoryThis = new \PhpParser\Node\Expr\Variable('this');
             $itIsInitilizableStatement = new ItIsInitializableStatement($factory, $entity->name);
 
             $factoryClass = $factory
