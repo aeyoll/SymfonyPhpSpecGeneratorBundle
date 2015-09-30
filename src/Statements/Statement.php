@@ -2,10 +2,11 @@
 
 namespace Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 abstract class Statement implements StatementInterface
 {
+    /**
+     * @var \PhpParser\BuilderFactory
+     */
     protected $factory;
 
     /**
@@ -19,11 +20,17 @@ abstract class Statement implements StatementInterface
     protected $entityName;
 
     /**
-     * @var ArrayCollection
+     * @var array
      */
     protected $statements;
 
-    public function __construct($factory, $entityName)
+    /**
+     * @{inheritDoc}
+     *
+     * @param \PhpParser\BuilderFactory $factory
+     * @param string                    $entityName
+     */
+    public function __construct(\PhpParser\BuilderFactory $factory, string $entityName)
     {
         $this->factory    = $factory;
         $this->entityName = $entityName;
@@ -31,6 +38,9 @@ abstract class Statement implements StatementInterface
         $this->initStatements();
     }
 
+    /**
+     * @{inheritDoc}
+     */
     public function getMethod()
     {
         $method = $this->factory->method($this->methodName);
@@ -44,6 +54,9 @@ abstract class Statement implements StatementInterface
         return $method;
     }
 
+    /**
+     * @{inheritDoc}
+     */
     public function getMethodName()
     {
         return $this->methodName;
