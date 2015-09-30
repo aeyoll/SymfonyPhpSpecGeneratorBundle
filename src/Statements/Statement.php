@@ -43,4 +43,9 @@ abstract class Statement implements StatementInterface
 
         return $method;
     }
+
+    public function getMethodName()
+    {
+        return $this->methodName;
+    }
 }
