@@ -77,19 +77,4 @@ interface GeneratorServiceInterface
      * @return string
      */
     public function getSpecNamespace();
-
-    /**
-     * Add the "it_is_initializable" test
-     */
-    public function addInitializableTest();
-
-    /**
-     * Add the "it_has_no_id_by_default" test
-     */
-    public function addNoIdByDefaultTest();
-
-    /**
-     * Add the "its_field_is_mutable" test
-     */
-    public function addMutableTest();
 }

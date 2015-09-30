@@ -135,28 +135,4 @@ class GeneratorService implements GeneratorServiceInterface
     {
         return $this->specNamespace;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addInitializableTest()
-    {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addNoIdByDefaultTest()
-    {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addMutableTest()
-    {
-
-    }
 }

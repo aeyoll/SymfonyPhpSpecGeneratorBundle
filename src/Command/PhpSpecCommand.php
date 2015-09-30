@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements\ItIsInitializableStatement;
 
 const SRC_PATH         = 'src/';
 const ARRAY_COLLECTION = 'Doctrine\Common\Collections\ArrayCollection';
@@ -53,16 +54,13 @@ class PhpSpecCommand extends ContainerAwareCommand
 
             // Default factory
             $factoryThis  = new \PhpParser\Node\Expr\Variable('this');
+
+            $itIsInitilizableStatement = new ItIsInitializableStatement($factory, $entity->name);
+
             $factoryClass = $factory
                 ->class($specClass)
                 ->extend('ObjectBehavior')
-                ->addStmt($factory
-                    ->method('it_is_initializable')
-                    ->addStmt(new \PhpParser\Node\Expr\MethodCall(
-                        $factoryThis,
-                        'shouldHaveType',
-                        array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_($entity->name)))
-                    )))
+                ->addStmt($itIsInitilizableStatement->getMethod())
                 ->addStmt($factory
                     ->method('it_has_no_id_by_default')
                     ->addStmt(new \PhpParser\Node\Expr\MethodCall(
