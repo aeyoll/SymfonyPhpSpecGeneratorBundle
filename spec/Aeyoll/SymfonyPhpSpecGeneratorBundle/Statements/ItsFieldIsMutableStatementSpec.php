@@ -4,7 +4,7 @@ namespace spec\Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements;
 
 use PhpSpec\ObjectBehavior;
 
-class ItHasNoIdByDefaultStatementSpec extends ObjectBehavior
+class ItsFieldIsMutableStatementSpec extends ObjectBehavior
 {
     function let(\PhpParser\BuilderFactory $factory)
     {
@@ -25,7 +25,7 @@ class ItHasNoIdByDefaultStatementSpec extends ObjectBehavior
 
     function it_has_a_valid_method_name()
     {
-        $this->getMethodName()->shouldReturn('it_has_no_id_by_default');
+        $this->getMethodName()->shouldReturn('its_field_is_mutable');
     }
 
     function it_is_initializable()
