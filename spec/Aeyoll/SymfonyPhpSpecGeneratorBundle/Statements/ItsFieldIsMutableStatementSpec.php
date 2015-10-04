@@ -30,7 +30,7 @@ class ItsFieldIsMutableStatementSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements\ItHasNoIdByDefaultStatementSpec');
+        $this->shouldHaveType('Aeyoll\SymfonyPhpSpecGeneratorBundle\Statements\ItsFieldIsMutableStatement');
     }
 
     function it_should_extend_statement_class()
