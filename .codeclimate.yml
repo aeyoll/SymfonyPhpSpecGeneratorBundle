@@ -1,6 +1,6 @@
 languages:
     PHP: true
-    exclude_paths:
-        - tests/*
-        - spec/*
-        - unit/*
+exclude_paths:
+    - tests/*
+    - spec/*
+    - unit/*
