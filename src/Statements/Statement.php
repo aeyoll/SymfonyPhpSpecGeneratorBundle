@@ -36,7 +36,7 @@ abstract class Statement implements StatementInterface
             throw new \Exception('You need to pass a \PhpParser\BuilderFactory to ' . __CLASS__ . ' first argument', 1);
         }
 
-        if (is_null($entityName) || !is_string($entityName) ) {
+        if (is_null($entityName) || !is_string($entityName)) {
             throw new \Exception('You need to pass a correct entity name (string) to ' . __CLASS__ . ' second argument', 1);
         }
 
