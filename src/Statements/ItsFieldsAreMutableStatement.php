@@ -7,7 +7,7 @@ class ItsFieldsAreMutableStatement extends Statement
     /**
      * {@inheritDoc}
      */
-    protected $methodName = 'its_fields_are_imutable';
+    protected $methodName = 'its_fields_are_mutable';
 
     /**
      * {@inheritDoc}
