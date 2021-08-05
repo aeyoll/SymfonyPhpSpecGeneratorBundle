@@ -2,6 +2,7 @@
 
 namespace Aeyoll\SymfonyPhpSpecGeneratorBundle\Command;
 
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -116,29 +117,30 @@ class PhpSpecCommand extends ContainerAwareCommand
 
             foreach ($entity->associationMappings as $name => $association) {
                 if (!is_null($association['mappedBy'])) {
-                    $factoryClass = $factoryClass
-                        ->addStmt($factory
-                            ->method('its_' . $name . '_are_mutable')
-                            ->addStmt(new \PhpParser\Node\Expr\Assign(new \PhpParser\Node\Expr\Variable('collection'), new \PhpParser\Node\Expr\New_(new \PhpParser\Node\Name('\\' . ARRAY_COLLECTION))))
-                            ->addStmt(new \PhpParser\Node\Expr\MethodCall(
-                                $factoryThis,
-                                'set' . ucfirst($name),
-                                array(new \PhpParser\Node\Arg(new \PhpParser\Node\Expr\Variable('collection')))
-                            ))
+                    if (in_array($association['type'], [ClassMetadataInfo::ONE_TO_MANY, ClassMetadataInfo::MANY_TO_MANY])) {
+                        $factoryClass = $factoryClass
+                            ->addStmt($factory
+                                ->method('its_' . $name . '_are_mutable')
+                                ->addStmt(new \PhpParser\Node\Expr\Assign(new \PhpParser\Node\Expr\Variable('collection'), new \PhpParser\Node\Expr\New_(new \PhpParser\Node\Name('\\' . ARRAY_COLLECTION))))
+                                ->addStmt(new \PhpParser\Node\Expr\MethodCall(
+                                    $factoryThis,
+                                    'set' . ucfirst($name),
+                                    array(new \PhpParser\Node\Arg(new \PhpParser\Node\Expr\Variable('collection')))
+                                ))
+                                ->addStmt(new \PhpParser\Node\Expr\MethodCall(
+                                    new \PhpParser\Node\Expr\MethodCall($factoryThis, 'get' . ucfirst($name)),
+                                    'shouldReturn',
+                                    array(new \PhpParser\Node\Arg(new \PhpParser\Node\Expr\Variable('collection')))
+                                )));
 
-                            ->addStmt(new \PhpParser\Node\Expr\MethodCall(
-                                new \PhpParser\Node\Expr\MethodCall($factoryThis, 'get' . ucfirst($name)),
-                                'shouldReturn',
-                                array(new \PhpParser\Node\Arg(new \PhpParser\Node\Expr\Variable('collection')))
-                            )));
-
-                    $factoryClass = $factoryClass
-                        ->addStmt($factory->method('it_initializes_' . $name . '_collection_by_default')
-                            ->addStmt(new \PhpParser\Node\Expr\MethodCall(
-                                new \PhpParser\Node\Expr\MethodCall($factoryThis, 'get' . ucfirst($name)),
-                                'shouldHaveType',
-                                array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_(ARRAY_COLLECTION)))
-                            )));
+                        $factoryClass = $factoryClass
+                            ->addStmt($factory->method('it_initializes_' . $name . '_collection_by_default')
+                                ->addStmt(new \PhpParser\Node\Expr\MethodCall(
+                                    new \PhpParser\Node\Expr\MethodCall($factoryThis, 'get' . ucfirst($name)),
+                                    'shouldHaveType',
+                                    array(new \PhpParser\Node\Arg(new \PhpParser\Node\Scalar\String_(ARRAY_COLLECTION)))
+                                )));
+                    }
                 }
             }
 
