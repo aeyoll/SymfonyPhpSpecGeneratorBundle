@@ -63,6 +63,7 @@ class PhpSpecCommand extends ContainerAwareCommand
                 ->addStmt($itIsInitilizableStatement->getMethod())
                 ->addStmt($factory
                     ->method('it_has_no_id_by_default')
+                    ->makePublic()
                     ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                         new \PhpParser\Node\Expr\MethodCall($factoryThis, 'getId'),
                         'shouldReturn',
