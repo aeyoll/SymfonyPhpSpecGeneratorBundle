@@ -71,7 +71,7 @@ class PhpSpecCommand extends ContainerAwareCommand
                     )));
 
             foreach ($entity->fieldMappings as $name => $field) {
-                if ($name !== 'id' && $name !== 'uuid') {
+                if ($name !== 'id' && strpos(strtolower($name), 'uuid') !== false) {
                     switch ($field['type']) {
                         case 'integer':
                             $value = new \PhpParser\Node\Scalar\LNumber(3);
