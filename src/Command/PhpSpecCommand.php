@@ -98,6 +98,7 @@ class PhpSpecCommand extends ContainerAwareCommand
                         $factoryClass = $factoryClass
                             ->addStmt($factory
                                 ->method('its_' . $name . '_is_mutable')
+                                ->makePublic()
                                 ->addStmt(new \PhpParser\Node\Expr\Assign(new \PhpParser\Node\Expr\Variable('value'), $value))
                                 ->addStmt(new \PhpParser\Node\Expr\MethodCall(
                                     $factoryThis,
