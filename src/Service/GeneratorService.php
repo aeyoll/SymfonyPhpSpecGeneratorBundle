@@ -63,7 +63,7 @@ class GeneratorService implements GeneratorServiceInterface
 
         if (count($meta) > 0) {
             foreach ($meta as $m) {
-                if (preg_match('(' . $bundle . ')', $m->getName())) {
+                if (strpos($m->getName(), $bundle) !== false) {
                     $entities[] = $m;
                 }
             }
